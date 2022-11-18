@@ -33,5 +33,26 @@ namespace SecurityDemo.Controllers
                 return View();
             }
         }
+
+         public ActionResult Signup()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Signup(User user)
+        {
+            using(MVC_DBEntities entites=new MVC_DBEntities())
+            {
+                entites.Users.Add(user);
+                entites.SaveChanges();
+            }
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
     }
 }
